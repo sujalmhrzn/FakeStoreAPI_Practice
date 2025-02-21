@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import GetUserDetails from "./GetUserDetails";
 
 interface User {
   id: number;
@@ -7,13 +8,17 @@ interface User {
   username: string;
 }
 
-interface UserDetailProps {
-  users: User[];
-}
-
-const UserDetail: React.FC<UserDetailProps> = ({ users }) => {
+const UserDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const user = users.find((user) => user.id === Number(id));
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    if (id) {
+      GetUserDetails(Number(id))
+        .then((userData) => setUser(userData))
+        .catch((error) => console.error("Error fetching user:", error));
+    }
+  }, [id]);
 
   if (!user) {
     return <h2>User Not Found</h2>;

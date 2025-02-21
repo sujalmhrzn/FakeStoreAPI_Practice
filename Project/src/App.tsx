@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     GetUsers()
-      .then((posts) => setData(posts))
+      .then((users) => setData(users))
       .catch((error) => console.error(error));
   }, []);
 
@@ -36,7 +36,7 @@ function App() {
         )}
 
         <Routes>
-          <Route path="/user/:id" element={<UserDetail users={data} />} />
+          <Route path="/user/:id" element={<UserDetail />} />
         </Routes>
       </div>
     </Router>
