@@ -4,12 +4,14 @@ interface UserProps {
   id: number;
   email: string;
   username: string;
+  phone: string;
 }
 
-const Allusers: React.FC<UserProps> = ({ id }) => {
+const Allusers: React.FC<UserProps> = ({ id, username }) => {
   return (
     <div className="all-users">
-      <h3>ID: {id}</h3>
+      <span>ID: {id}</span>
+      <span> || Name: {username}</span>
     </div>
   );
 };

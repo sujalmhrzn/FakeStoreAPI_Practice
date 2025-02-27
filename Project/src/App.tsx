@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import GetUsers from "./components/GetUsers";
 import Allusers from "./components/Allusers";
-import UserDetail from "./components/UserDetail";
 
 interface User {
   id: number;
@@ -20,26 +19,20 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <div className="App">
-        <h2>All Users</h2>
-        {data.length > 0 ? (
-          data.map((e) => (
-            <div key={e.id}>
-              <Link to={`/user/${e.id}`}>
-                <Allusers id={e.id} email={e.email} username={e.username} />
-              </Link>
-            </div>
-          ))
-        ) : (
-          <p>No data available</p>
-        )}
-
-        <Routes>
-          <Route path="/user/:id" element={<UserDetail />} />
-        </Routes>
-      </div>
-    </Router>
+    <div className="App">
+      <h2>All Users</h2>
+      {data.length > 0 ? (
+        data.map((e) => (
+          <div key={e.id}>
+            <Link to={`/users/${e.id}`}>
+              <Allusers id={e.id} email={e.email} username={e.username} />
+            </Link>
+          </div>
+        ))
+      ) : (
+        <p>No data available</p>
+      )}
+    </div>
   );
 }
 
